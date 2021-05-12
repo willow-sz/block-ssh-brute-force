@@ -3,24 +3,21 @@
 import fwblock
 import re
 
-#reading out the file
-searchInvalid = open('./sshdlog')
+#reading file sshdlog
 
-searchInvalid.readlines() 
+with open (sshdlog) as f:
+contents = f.read()
 
-# creating a regex pattern for IP addresses
-patternForIP = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
- 
-# initializing the list object
-lst=[]
- 
-# searching for the IP addresses
-for line in fstring:
-   lst.append(pattern.search(line)[0])
- 
-# searhing for 'invalid user' in the sshdlog file
-InvalidFound = searchInvalid.count("invalid")
 
-#blocking ip address if there are 3 attempts
-if InvalidFound == 3:
- fwblock.block_ip('172.2.0.123')
+for line in contents:
+
+#searching for 'invalid user' in the text file
+
+if 'invalid user' in contents:
+ip = re.findall(re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"), line)
+n = contents.count(re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"))
+
+#checking if ip appears 3 or more times, if yes, blocking it
+
+if n >= 3:
+fwblock.block_ip(ip)
