@@ -5,7 +5,7 @@ import re
 
 #reading file sshdlog
 
-with open (sshdlog) as f:
+with open ("sshdlog") as f:
  data = f.read()
 
 
