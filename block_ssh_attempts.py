@@ -15,6 +15,7 @@ for line in contents:
 
  if 'invalid user' in contents:
   ip = re.findall(re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'), line)
+  n = data.count(re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'))
    
 
 #checking if ip appears 3 or more times, if yes, blocking it
